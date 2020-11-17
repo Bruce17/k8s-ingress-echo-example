@@ -1,0 +1,26 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: banana-app
+  namespace: test-ingress-ns
+  labels:
+    app: banana
+spec:
+  containers:
+    - name: banana-app
+      image: teapow/http-echo
+      env:
+        - name: ECHO_MESSAGE
+          value: "banana"
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: banana-service
+  namespace: test-ingress-ns
+spec:
+  selector:
+    app: banana
+  ports:
+    - port: 8080

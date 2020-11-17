@@ -1,0 +1,26 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: apple-app
+  namespace: test-ingress-ns
+  labels:
+    app: apple
+spec:
+  containers:
+    - name: apple-app
+      image: teapow/http-echo
+      env:
+        - name: ECHO_MESSAGE
+          value: "apple"
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: apple-service
+  namespace: test-ingress-ns
+spec:
+  selector:
+    app: apple
+  ports:
+    - port: 8080
